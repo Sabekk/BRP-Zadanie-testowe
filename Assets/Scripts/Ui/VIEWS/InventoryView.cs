@@ -79,6 +79,7 @@ public class InventoryView : UiView
 
     private void UseCurrentSoul(bool canUse)
     {
+        //Double check
         if (!canUse)
         {
             CantUseCurrentSoul();
@@ -111,6 +112,7 @@ public class InventoryView : UiView
                 Message = "Are you sure you want to USE: " + _currentSoulInformation.soulItem.Name + " ?",
                 Confirm_OnClick = () => UseCurrentSoul(isInCorrectLocalization)
             };
+            UseButton.interactable = isInCorrectLocalization;
             UseButton.onClick.AddListener(() => GUIController.Instance.ShowPopUpMessage(popUpInfo));
         }
         UseButton.gameObject.SetActive(active);
