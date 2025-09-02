@@ -3388,7 +3388,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &2532535109878922765
 GameObject:
   m_ObjectHideFlags: 0
@@ -6773,7 +6773,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Imie i nazwisko: \nxxx xxx"
+  m_Text: "Imie i nazwisko: \nSebastian Blaszczyk"
 --- !u!1 &5964859326624838518
 GameObject:
   m_ObjectHideFlags: 0
@@ -13779,7 +13779,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8146150604104137997}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9998518
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
