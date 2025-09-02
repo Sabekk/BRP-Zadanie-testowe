@@ -11,7 +11,8 @@ public class ScoreController : MonoBehaviour
 
     #region PROPERTIES
 
-    private float Score
+    public static ScoreController Instance { get; private set; }
+    public float Score
     {
         get => _currentScore;
         set
@@ -20,13 +21,18 @@ public class ScoreController : MonoBehaviour
                 return;
 
             _currentScore = value;
-            GameEvents.OnScoreUpdated?.Invoke(_currentScore);
+            GameEvents.OnScoreUpdated?.Invoke();
         }
     }
 
     #endregion
 
     #region UNITY_METHODS
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
