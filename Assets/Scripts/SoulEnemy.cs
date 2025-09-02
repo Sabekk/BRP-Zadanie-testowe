@@ -8,7 +8,7 @@ public class SoulEnemy : MonoBehaviour, IEnemy
 
     private SpawnPoint _enemyPosition;
 
-    public EnemyData Data { get; set; }
+    public EnemyData Data { get; private set; }
 
     public void SetupEnemy(EnemyData data, SpawnPoint spawnPoint)
     {
@@ -46,14 +46,12 @@ public class SoulEnemy : MonoBehaviour, IEnemy
 
     private void UseBow()
     {
-        // USE BOW
-        GameEvents.EnemyKilled?.Invoke(this);
+        GameEvents.EnemyKilled?.Invoke(new EnemyKilledEventArgs(this, DamageType.BOW));
     }
 
     private void UseSword()
     {
-        GameEvents.EnemyKilled?.Invoke(this);
-        // USE SWORD
+        GameEvents.EnemyKilled?.Invoke(new EnemyKilledEventArgs(this, DamageType.SWORD));
     }
 
     #region OnClicks
@@ -79,7 +77,7 @@ public class SoulEnemy : MonoBehaviour, IEnemy
 
 public interface IEnemy
 {
-    EnemyData Data { get; set; }
+    EnemyData Data { get; }
     SpawnPoint GetEnemyPosition();
     GameObject GetEnemyObject();
 }

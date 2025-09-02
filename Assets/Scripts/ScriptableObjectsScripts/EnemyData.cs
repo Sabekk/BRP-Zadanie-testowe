@@ -8,8 +8,8 @@ public class EnemyData : ScriptableObject
     [SerializeField] private string _name;
     [SerializeField] private string _description;
     [SerializeField] private Sprite _icon;
-    [SerializeField] private int _score = 10;
-    [SerializeField] private EnemyWeakType _weakType;
+    [SerializeField] private float _score = 10;
+    [SerializeField] private DamageType _weakType;
     [SerializeField] private float _scoreMultiplerForWeakness = 1.5f;
 
     #endregion
@@ -19,8 +19,8 @@ public class EnemyData : ScriptableObject
     public string Name => _name;
     public string Dscription => _description;
     public Sprite Icon => _icon;
-    public int Score => _score;
-    public EnemyWeakType WeakType => _weakType;
+    public DamageType WeakType => _weakType;
+    public float Score => _score;
     public float ScoreMultiplerForWeakness => _scoreMultiplerForWeakness;
 
     #endregion

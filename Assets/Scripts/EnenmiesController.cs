@@ -41,10 +41,10 @@ public class EnenmiesController : MonoBehaviour
         GameEvents.EnemyKilled -= EnemyKilled;
     }
 
-    private void EnemyKilled(IEnemy enemy)
+    private void EnemyKilled(EnemyKilledEventArgs e)
     {
-        FreeSpawnPoint(enemy.GetEnemyPosition());
-        DestroyKilledEnemy(enemy.GetEnemyObject());
+        FreeSpawnPoint(e.Enemy.GetEnemyPosition());
+        DestroyKilledEnemy(e.Enemy.GetEnemyObject());
         StartCoroutine(SpawnEnemyViaCor());
     }
 

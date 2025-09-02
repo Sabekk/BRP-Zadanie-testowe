@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Flags]
-public enum EnemyWeakType
+public enum DamageType
 {
     NONE = 0,
     SWORD = 1,

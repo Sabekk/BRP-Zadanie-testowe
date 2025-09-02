@@ -5,19 +5,19 @@ public class ScoreController : MonoBehaviour
 {
     #region VARIABLES
 
-    private int _currentScore;
+    private float _currentScore;
 
     #endregion
 
     #region PROPERTIES
 
-    private int Score
+    private float Score
     {
         get => _currentScore;
         set
         {
             _currentScore = value;
-            //Event
+            GameEvents.OnScoreUpdated?.Invoke(_currentScore);
         }
     }
 
@@ -63,9 +63,15 @@ public class ScoreController : MonoBehaviour
 
     #endregion
 
-    private void EnemyKilled(IEnemy enemy)
+    private void EnemyKilled(EnemyKilledEventArgs e)
     {
+        float reward = e.Enemy.Data.Score;
+        if (e.WasKilledByWeakness())
+        {
+            reward *= e.Enemy.Data.ScoreMultiplerForWeakness;
+        }
 
+        Score += reward;
     }
 
     #endregion
