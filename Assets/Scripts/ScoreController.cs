@@ -16,6 +16,9 @@ public class ScoreController : MonoBehaviour
         get => _currentScore;
         set
         {
+            if (_currentScore == value)
+                return;
+
             _currentScore = value;
             GameEvents.OnScoreUpdated?.Invoke(_currentScore);
         }
@@ -51,19 +54,19 @@ public class ScoreController : MonoBehaviour
 
     private void AttachEvents()
     {
-        GameEvents.EnemyKilled += EnemyKilled;
+        GameEvents.EnemyKilled += HandleEnemyKilled;
+        GameEvents.OnSoulItemUsed += HandleSoulItemUsed;
     }
 
     private void DetachEvents()
     {
-        GameEvents.EnemyKilled -= EnemyKilled;
+        GameEvents.EnemyKilled -= HandleEnemyKilled;
+        GameEvents.OnSoulItemUsed -= HandleSoulItemUsed;
     }
 
     #region HANDLERS
 
-    #endregion
-
-    private void EnemyKilled(EnemyKilledEventArgs e)
+    private void HandleEnemyKilled(EnemyKilledEventArgs e)
     {
         float reward = e.Enemy.Data.Score;
         if (e.WasKilledByWeakness())
@@ -73,6 +76,13 @@ public class ScoreController : MonoBehaviour
 
         Score += reward;
     }
+
+    private void HandleSoulItemUsed(SoulInformation soulInformation)
+    {
+        Score += soulInformation.soulItem.PointsFromUsing;
+    }
+
+    #endregion
 
     #endregion
 }

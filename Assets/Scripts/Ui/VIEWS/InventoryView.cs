@@ -88,6 +88,7 @@ public class InventoryView : UiView
         {
             //USE SOUL
             Destroy(_currentSelectedGameObject);
+            GameEvents.OnSoulItemUsed?.Invoke(_currentSoulInformation);
             ClearSoulInformation();
         }
     }
