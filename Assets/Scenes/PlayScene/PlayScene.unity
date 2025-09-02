@@ -180,6 +180,50 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
   m_RespectSceneVisibilityWhenBakingGI: 0
+--- !u!1 &545985930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 545985931}
+  - component: {fileID: 545985932}
+  m_Layer: 0
+  m_Name: ScoreController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &545985931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545985930}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1834795875}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &545985932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545985930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 336c2d9f89995544584839177dbf3abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &613764261
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,18 +548,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllEnemies:
-  - {fileID: 21300000, guid: 61d5891e67f06444d9004a373a2e548a, type: 3}
-  - {fileID: 21300000, guid: b8d4efeccd306df41b32041c9eec6a6c, type: 3}
-  - {fileID: 21300000, guid: fc384a4ae3fec8d4db01fdf4b5793a6d, type: 3}
-  - {fileID: 21300000, guid: 5e999ad886e957e448501429108f7b74, type: 3}
-  - {fileID: 21300000, guid: 9539da83b82de7f418200ccb9510e701, type: 3}
-  - {fileID: 21300000, guid: fcc672626043e8f4b92e7d5222090776, type: 3}
-  - {fileID: 21300000, guid: b5b2d6fb7a8e66e46929ecc28ddfc012, type: 3}
-  - {fileID: 21300000, guid: 6fb349326e669734490a9ddd8c4692be, type: 3}
-  - {fileID: 21300000, guid: b53a2d35b919c6e4fa606a49b2f33ad7, type: 3}
-  - {fileID: 21300000, guid: e413ceecc80aa7e428e77ad414e10c21, type: 3}
-  - {fileID: 21300000, guid: 33a73e0fb424a4c43995df6b685ff10d, type: 3}
-  - {fileID: 21300000, guid: 97d9a2c29790d014dbed2404abb5e94a, type: 3}
+  - {fileID: 11400000, guid: ece41e1d5d2656c4a8675c9e6b916d46, type: 2}
+  - {fileID: 11400000, guid: e91ab6fd04705214dba5d52d742ecc17, type: 2}
+  - {fileID: 11400000, guid: a2e8fbee8ed9911468939be0cfc5fe26, type: 2}
+  - {fileID: 11400000, guid: eae0cf5fedcd2194db80744229c43fe5, type: 2}
+  - {fileID: 11400000, guid: 951827e00faa43d4bba54ef06768815f, type: 2}
+  - {fileID: 11400000, guid: b831d9d73bb21c342a6b8469fd3324ab, type: 2}
+  - {fileID: 11400000, guid: 795a44c2c83a5e842b363872965be5e0, type: 2}
+  - {fileID: 11400000, guid: 0d53e8ddd1783274b8075998ada8a2ac, type: 2}
+  - {fileID: 11400000, guid: 21a961014960b05439bed822253731b3, type: 2}
+  - {fileID: 11400000, guid: 2bb8482ce2aab0345975b9b00ac4c7ce, type: 2}
+  - {fileID: 11400000, guid: 785e9815c0bb373489dca608aa454db4, type: 2}
+  - {fileID: 11400000, guid: 0830435688734cf4091ce405ab7ddee6, type: 2}
   SpawnPoints:
   - Position: {fileID: 1109336077}
     IsOccupied: 0
@@ -772,6 +816,7 @@ Transform:
   m_Children:
   - {fileID: 1925327026}
   - {fileID: 1499218541}
+  - {fileID: 545985931}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1840739776

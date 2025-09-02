@@ -8,9 +8,12 @@ public class SoulEnemy : MonoBehaviour, IEnemy
 
     private SpawnPoint _enemyPosition;
 
-    public void SetupEnemy(Sprite sprite, SpawnPoint spawnPoint)
+    public EnemyData Data { get; set; }
+
+    public void SetupEnemy(EnemyData data, SpawnPoint spawnPoint)
     {
-        EnemySpriteRenderer.sprite = sprite;
+        Data = data;
+        EnemySpriteRenderer.sprite = Data.Icon;
         _enemyPosition = spawnPoint;
         gameObject.SetActive(true);
     }
@@ -76,6 +79,7 @@ public class SoulEnemy : MonoBehaviour, IEnemy
 
 public interface IEnemy
 {
+    EnemyData Data { get; set; }
     SpawnPoint GetEnemyPosition();
     GameObject GetEnemyObject();
 }

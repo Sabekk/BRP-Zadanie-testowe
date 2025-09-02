@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnenmiesController : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> AllEnemies;
+    [SerializeField] private List<EnemyData> AllEnemies;
     [SerializeField] private List<SpawnPoint> SpawnPoints;
     [SerializeField] private GameObject EnemyPrefab;
 
@@ -83,8 +83,8 @@ public class EnenmiesController : MonoBehaviour
         
         SpawnPoints[freeSpawnPointIndex].IsOccupied = true;
         SoulEnemy enemy = Instantiate(EnemyPrefab, SpawnPoints[freeSpawnPointIndex].Position.position, Quaternion.identity, transform).GetComponent<SoulEnemy>();
-        int spriteIndex = Random.Range(0, AllEnemies.Count);
-        enemy.SetupEnemy(AllEnemies[spriteIndex], SpawnPoints[freeSpawnPointIndex]);
+        int enemyIntex = Random.Range(0, AllEnemies.Count);
+        enemy.SetupEnemy(AllEnemies[enemyIntex], SpawnPoints[freeSpawnPointIndex]);
         _currentEnemies++;
     }
 
