@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ScoreController : MonoBehaviour
+public class ScoreController : MonoSingleton<ScoreController>
 {
     #region VARIABLES
 
@@ -11,7 +11,6 @@ public class ScoreController : MonoBehaviour
 
     #region PROPERTIES
 
-    public static ScoreController Instance { get; private set; }
     public float Score
     {
         get => _currentScore;
@@ -28,11 +27,6 @@ public class ScoreController : MonoBehaviour
     #endregion
 
     #region UNITY_METHODS
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Start()
     {
