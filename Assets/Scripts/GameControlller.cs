@@ -9,29 +9,8 @@ public enum GameLocalization
     TOWER
 }
 
-public class GameControlller : MonoBehaviour
+public class GameControlller : MonoSingleton<GameControlller>
 {
-    #region Singleton
-
-    private static GameControlller _instance;
-
-    public static GameControlller Instance
-    {
-        get
-        {
-            if (_instance == null) _instance = FindFirstObjectByType<GameControlller>();
-            return _instance;
-        }
-        set => _instance = value;
-    }
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-    #endregion
-
     [SerializeField] private GameLocalization currentGameLocalization;
 
     public GameLocalization CurrentGameLocalization

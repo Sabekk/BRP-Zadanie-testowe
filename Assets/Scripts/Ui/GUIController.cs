@@ -1,25 +1,18 @@
 ﻿using UnityEngine;
 
-public class GUIController : MonoBehaviour
+public class GUIController : MonoSingleton<GUIController>
 {
-
-    #region singleton
-
-    public static GUIController Instance;
-
-    private void Awake()
-    {
-        DisableOnStartObject.SetActive(false);
-        Instance = this;
-    }
-
-    #endregion
-
     [SerializeField] private GameObject DisableOnStartObject;
     [SerializeField] private RectTransform ViewsParent;
     [SerializeField] private GameObject InGameGuiObject;
     [SerializeField] private PopUpView PopUp;
     [SerializeField] private PopUpScreenBlocker ScreenBlocker;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        DisableOnStartObject.SetActive(false);
+    }
 
     private void Start()
     {
@@ -58,6 +51,6 @@ public class GUIController : MonoBehaviour
     {
         Application.Quit();
     }
-    
+
     #endregion
 }

@@ -20,6 +20,10 @@ public class InventoryView : UiView
     {
         base.Awake();
         _contentParent = (RectTransform)SoulItemPlaceHolder.transform.parent;
+    }
+
+    private void Start()
+    {
         InitializeInventoryItems();
     }
 
