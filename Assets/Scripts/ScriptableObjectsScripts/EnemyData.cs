@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyData_", menuName = "EnemyData", order = 0)]
+[CreateAssetMenu(fileName = "EnemyData_", menuName = "Data/EnemyData", order = 0)]
 public class EnemyData : ScriptableObject
 {
     #region VARIABLES

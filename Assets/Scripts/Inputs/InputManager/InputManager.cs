@@ -8,6 +8,7 @@ namespace Gameplay.Inputs
 
         [SerializeField] private InputMapController _mapController;
         [SerializeField] private DeviceDetectionController _deviceDetectionController;
+        [SerializeField] private InpuIconsController _inpuIconsController;
 
         #endregion
 
@@ -15,21 +16,33 @@ namespace Gameplay.Inputs
 
         public InputMapController MapController => _mapController;
         public DeviceDetectionController DeviceDetectionController => _deviceDetectionController;
+        public InpuIconsController InpuIconsController => _inpuIconsController;
 
         #endregion
 
         #region UNITY_METHODS
 
-        private void Start()
+        //For future -> controllers will no longer be a monobehavior
+        protected override void Awake()
         {
+            base.Awake();
             MapController.Initialzie();
             DeviceDetectionController.Initialize();
+            InpuIconsController.Initialize();
+        }
+
+        private void Start()
+        {
+            MapController.LateInitialzie();
+            DeviceDetectionController.LateInitialzie();
+            InpuIconsController.LateInitialzie();
         }
 
         private void OnDestroy()
         {
             MapController.CleanUp();
             DeviceDetectionController.CleanUp();
+            InpuIconsController.CleanUp();
         }
 
         #endregion

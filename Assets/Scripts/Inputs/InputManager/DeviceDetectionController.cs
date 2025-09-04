@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
+//TODO Remove MonoBehaviour and get DeviceNamesData from database
 public class DeviceDetectionController : MonoBehaviour
 {
     #region VARIABLES
@@ -25,6 +26,10 @@ public class DeviceDetectionController : MonoBehaviour
     public void Initialize()
     {
         BuildDeviceLookup();
+    }
+
+    public void LateInitialzie()
+    {
         AttachEvents();
     }
 

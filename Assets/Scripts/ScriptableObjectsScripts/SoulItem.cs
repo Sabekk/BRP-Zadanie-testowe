@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Soul Item", menuName = "Soul Item", order = 0)]
+[CreateAssetMenu(fileName = "Soul Item", menuName = "Data/Soul Item", order = 0)]
 public class SoulItem : ScriptableObject
 {
     public GameLocalization UsableInLocalization = GameLocalization.DUNGEON;

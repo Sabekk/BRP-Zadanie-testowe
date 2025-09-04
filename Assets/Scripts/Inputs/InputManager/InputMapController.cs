@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Gameplay.Inputs
 {
+    //TODO Remove MonoBehaviour
     public class InputMapController : MonoBehaviour
     {
         #region VARIABLES
@@ -41,10 +42,14 @@ namespace Gameplay.Inputs
         {
             UiInputs = new(Input);
             GameplayInputs = new(Input);
+        }
 
+        public void LateInitialzie()
+        {
             AttachEvents();
             RefreshInputs();
         }
+
         public void CleanUp()
         {
             DetachEvents();

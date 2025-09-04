@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DeviceNamesData", menuName = "DeviceNamesData", order = 0)]
+[CreateAssetMenu(fileName = "DeviceNamesData", menuName = "Data/DeviceNamesData", order = 0)]
 public class DeviceNamesData : ScriptableObject
 {
     #region VARIABLES
