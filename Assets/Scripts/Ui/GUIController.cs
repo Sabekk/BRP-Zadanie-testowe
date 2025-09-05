@@ -20,12 +20,12 @@ public class GUIController : MonoSingleton<GUIController>
     protected override void Awake()
     {
         base.Awake();
-        DisableOnStartObject.SetActive(false);
-        AttachEvents();
+        DisableOnStartObject.SetActive(false);    
     }
 
     private void Start()
     {
+        AttachEvents();
         if (ScreenBlocker) ScreenBlocker.InitBlocker();
     }
 
