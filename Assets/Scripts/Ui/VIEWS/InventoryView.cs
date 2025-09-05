@@ -38,8 +38,9 @@ public class InventoryView : UiView
         SoulItemPlaceHolder.gameObject.SetActive(false);
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
         ClearSoulInformation();
     }
 

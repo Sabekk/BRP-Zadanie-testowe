@@ -18,6 +18,16 @@ public class UiView : MonoBehaviour
         BackButon.onClick.AddListener(() => DisableView_OnClick(this));
     }
 
+    public virtual void OnEnable()
+    {
+        GameEvents.OnViewOpened?.Invoke(this);
+    }
+
+    public virtual void OnDisable()
+    {
+        GameEvents.OnViewClosed?.Invoke(this);
+    }
+
     public void ActiveView_OnClick(UiView viewToActive)
     {
         viewToActive.SetParentView(this);

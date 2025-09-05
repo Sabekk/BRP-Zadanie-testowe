@@ -12,9 +12,6 @@ namespace Gameplay.Inputs
         #endregion
 
         #region PROPERTIES
-
-        public UIInputs UiInputs { get; private set; }
-        public GameplayInputs GameplayInputs { get; private set; }
         public static InputBinds Input
         {
             get
@@ -25,6 +22,10 @@ namespace Gameplay.Inputs
             }
         }
 
+        public UIInputs UiInputs { get; private set; }
+        public GameplayInputs GameplayInputs { get; private set; }
+
+        private GameStateManager GameStateManager => GameStateManager.Instance;
 
         #endregion
 
@@ -57,21 +58,48 @@ namespace Gameplay.Inputs
 
         private void AttachEvents()
         {
-            //TODO Add Gameplay State events
+            GameEvents.OnGameStateChanged += HandleGameStateChanged;
         }
 
         private void DetachEvents()
         {
-            //TODO Add Gameplay State events
+            GameEvents.OnGameStateChanged -= HandleGameStateChanged;
         }
 
         private void RefreshInputs()
         {
-            //TODO Add Gameplay State switch
-
-            GameplayInputs.Enable();
-            UiInputs.Disable();
+            if (GameStateManager)
+            {
+                switch (GameStateManager.CurrentGameState)
+                {
+                    case GameStateType.GAMEPLAY:
+                        GameplayInputs.Enable();
+                        UiInputs.Disable();
+                        break;
+                    case GameStateType.UI_VIEW:
+                        GameplayInputs.Disable();
+                        UiInputs.Enable();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                Debug.LogError("GameStateManager is null. Can't change inputs!");
+                GameplayInputs.Enable();
+                UiInputs.Disable();
+            }
         }
+
+        #region HANDLERS
+
+        private void HandleGameStateChanged()
+        {
+            RefreshInputs();
+        }
+
+        #endregion
 
         #endregion
     }

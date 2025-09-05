@@ -14,13 +14,15 @@ public class PopUpView : UiView
         GetBackButton().onClick.AddListener(() => DestroyView_OnClick(this));
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
         GUIController.Instance.ActiveScreenBlocker(true, this);
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
+        base.OnDisable();
         GUIController.Instance.ActiveScreenBlocker(false, this);
     }
     
