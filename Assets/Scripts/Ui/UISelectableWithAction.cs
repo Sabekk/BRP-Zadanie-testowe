@@ -12,29 +12,24 @@ public class UISelectableWithAction : UISelectable
 
     #endregion
 
-    #region UNITY_METHODS
-
-    private void Start()
-    {
-        _inputAction.enabled = false;
-    }
-
-    #endregion
-
     #region METHODS
+
+    public override void SetUiView(UiView parentView)
+    {
+        base.SetUiView(parentView);
+        _inputAction.SetUiView(parentView);
+    }
 
     public override void OnSelect()
     {
         base.OnSelect();
         _inputAction.OnSelect();
-        _inputAction.enabled = true;
     }
 
     public override void OnDeselect()
     {
         base.OnDeselect();
         _inputAction.OnDeselect();
-        _inputAction.enabled = false;
     }
 
     #endregion

@@ -445,6 +445,7 @@ GameObject:
   - component: {fileID: 3279540375680964499}
   - component: {fileID: 5641305072146584621}
   - component: {fileID: 5294026357533491487}
+  - component: {fileID: 5137762685742538367}
   - component: {fileID: 5983265206425394114}
   m_Layer: 5
   m_Name: CreditsButton
@@ -569,6 +570,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5137762685742538367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391430540559043599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48254fad9199634790fbae6de293563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _topNeighbour: {fileID: 6382500314200634323}
+  _bottomNeighbour: {fileID: 5670928359038643365}
+  _leftNeighbour: {fileID: 0}
+  _rightNeighbour: {fileID: 0}
+  _inputAction: {fileID: 5983265206425394114}
 --- !u!114 &5983265206425394114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,6 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -3976165851602718017, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 1
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 872124527871554047}
   _trigger: 1
@@ -1463,6 +1482,7 @@ GameObject:
   - component: {fileID: 1245288309279814343}
   - component: {fileID: 8322589119731527203}
   - component: {fileID: 5548534035583438563}
+  - component: {fileID: 3640718859852910010}
   - component: {fileID: 3070621411332021406}
   m_Layer: 5
   m_Name: OptionsButton
@@ -1587,6 +1607,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3640718859852910010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801779052935273082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48254fad9199634790fbae6de293563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _topNeighbour: {fileID: 3511996184098136081}
+  _bottomNeighbour: {fileID: 6382500314200634323}
+  _leftNeighbour: {fileID: 0}
+  _rightNeighbour: {fileID: 0}
+  _inputAction: {fileID: 3070621411332021406}
 --- !u!114 &3070621411332021406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1601,6 +1638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -3976165851602718017, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 1
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 2703195645276201570}
   _trigger: 1
@@ -1738,6 +1776,8 @@ MonoBehaviour:
   UnpauseOnClose: 0
   CloseOnNewView: 1
   BackButon: {fileID: 4480285739139039147}
+  _selectables: []
+  _automaticGetSelectables: 0
 --- !u!1 &899995588459660306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,6 +2475,7 @@ GameObject:
   - component: {fileID: 1052247291225840549}
   - component: {fileID: 5170535560390302932}
   - component: {fileID: 6015147282059271788}
+  - component: {fileID: 3511996184098136081}
   - component: {fileID: 3800618551854927020}
   m_Layer: 5
   m_Name: ResumeButton
@@ -2547,6 +2588,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3511996184098136081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624939824738443392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48254fad9199634790fbae6de293563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _topNeighbour: {fileID: 5670928359038643365}
+  _bottomNeighbour: {fileID: 3640718859852910010}
+  _leftNeighbour: {fileID: 0}
+  _rightNeighbour: {fileID: 0}
+  _inputAction: {fileID: 3800618551854927020}
 --- !u!114 &3800618551854927020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2559,7 +2617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8acc06d1a6b73a4fb1352afb4ac337a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputAction: {fileID: 0}
+  _inputAction: {fileID: -3976165851602718017, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
+    type: 3}
+  _onlyIfSelected: 1
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 8758355199548525981}
   _trigger: 1
@@ -3036,6 +3096,8 @@ MonoBehaviour:
   UnpauseOnClose: 0
   CloseOnNewView: 1
   BackButon: {fileID: 5748357057442252130}
+  _selectables: []
+  _automaticGetSelectables: 0
 --- !u!1 &1941993581914623375
 GameObject:
   m_ObjectHideFlags: 0
@@ -3403,6 +3465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -362769192623329289, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 0
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 4451527800705527394}
   _trigger: 1
@@ -5534,6 +5597,8 @@ MonoBehaviour:
   UnpauseOnClose: 0
   CloseOnNewView: 1
   BackButon: {fileID: 9038020806785378734}
+  _selectables: []
+  _automaticGetSelectables: 0
 --- !u!1 &3472454193382289901
 GameObject:
   m_ObjectHideFlags: 0
@@ -5625,6 +5690,8 @@ MonoBehaviour:
   UnpauseOnClose: 1
   CloseOnNewView: 1
   BackButon: {fileID: 6015147282059271788}
+  _selectables: []
+  _automaticGetSelectables: 0
 --- !u!1 &3740049496177446783
 GameObject:
   m_ObjectHideFlags: 0
@@ -6954,6 +7021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -362769192623329289, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 1
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 4209826643413680043}
   _trigger: 1
@@ -7418,6 +7486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -362769192623329289, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 1
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 5403708146737101255}
   _trigger: 1
@@ -8927,6 +8996,7 @@ GameObject:
   - component: {fileID: 3686813414611893284}
   - component: {fileID: 1405243795855319169}
   - component: {fileID: 1766992754867988132}
+  - component: {fileID: 6382500314200634323}
   - component: {fileID: 1107191401691411174}
   m_Layer: 5
   m_Name: ReadMeButton
@@ -9051,6 +9121,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6382500314200634323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6554048839050502090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48254fad9199634790fbae6de293563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _topNeighbour: {fileID: 3640718859852910010}
+  _bottomNeighbour: {fileID: 5137762685742538367}
+  _leftNeighbour: {fileID: 0}
+  _rightNeighbour: {fileID: 0}
+  _inputAction: {fileID: 1107191401691411174}
 --- !u!114 &1107191401691411174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9065,6 +9152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -3976165851602718017, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 1
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 2496825179548118871}
   _trigger: 1
@@ -9206,6 +9294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -362769192623329289, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 1
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 286302122164791323}
   _trigger: 1
@@ -9521,6 +9610,7 @@ GameObject:
   - component: {fileID: 881200882976957965}
   - component: {fileID: 6989324305714879379}
   - component: {fileID: 1692336654364349844}
+  - component: {fileID: 5670928359038643365}
   - component: {fileID: 3427580832260483981}
   m_Layer: 5
   m_Name: ExitButton
@@ -9645,6 +9735,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5670928359038643365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6898948012834464123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48254fad9199634790fbae6de293563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _topNeighbour: {fileID: 5137762685742538367}
+  _bottomNeighbour: {fileID: 3511996184098136081}
+  _leftNeighbour: {fileID: 0}
+  _rightNeighbour: {fileID: 0}
+  _inputAction: {fileID: 3427580832260483981}
 --- !u!114 &3427580832260483981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9659,6 +9766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -3976165851602718017, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 1
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 7958183259465041436}
   _trigger: 1
@@ -11269,6 +11377,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91440100c711914f92b44ecc13e3ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _topNeighbour: {fileID: 0}
+  _bottomNeighbour: {fileID: 0}
+  _leftNeighbour: {fileID: 0}
+  _rightNeighbour: {fileID: 0}
   MainImage: {fileID: 8291080142832564296}
   SoulButton: {fileID: 6056294358495578194}
   selection: {fileID: 8678172955188493395}
@@ -12057,6 +12169,8 @@ MonoBehaviour:
   UnpauseOnClose: 1
   CloseOnNewView: 0
   BackButon: {fileID: 6082014409514280659}
+  _selectables: []
+  _automaticGetSelectables: 0
   SoulItemPlaceHolder: {fileID: 6435406957881164876}
   Description: {fileID: 8146150602232835790}
   Name: {fileID: 3747887395249707520}
@@ -12521,6 +12635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -4732959255243119731, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 0
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 2961846109899091617}
   _trigger: 1
@@ -14424,6 +14539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -7595655723551845290, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 0
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 5533860982738238707}
   _trigger: 1
@@ -15309,6 +15425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -3976165851602718017, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 0
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 612836181142246194}
   _trigger: 1
@@ -16411,6 +16528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -2242542728497507096, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 0
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 4892600609646621696}
   _trigger: 1

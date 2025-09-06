@@ -1,21 +1,18 @@
 using Gameplay.Inputs;
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class InputActionButton : UISelectable
+public class InputActionButton : UISelectableRaw
 {
     #region VARIABLES
 
     [SerializeField] private InputActionReference _inputAction;
+    [SerializeField] private bool _onlyIfSelected = false;
     [SerializeField] private bool _onlyWhenTopView = true;
     [SerializeField] private Image _buttonActionIcon;
     [SerializeField] private TriggerPhase _trigger = TriggerPhase.PERFORMED;
-
-    private UiView _parentView;
 
     private InputAction _actionResolved;
 
@@ -34,7 +31,6 @@ public class InputActionButton : UISelectable
     private void Awake()
     {
         Button = GetComponent<Button>();
-        _parentView = GetComponentInParent<UiView>(true);
     }
 
     private void Start()
@@ -74,7 +70,6 @@ public class InputActionButton : UISelectable
 
     public override void ToggleTransition(bool state)
     {
-        base.ToggleTransition(state);
         if (state)
             RefreshIcon();
         else
@@ -86,7 +81,7 @@ public class InputActionButton : UISelectable
         if (_buttonActionIcon == null)
             return;
 
-        if (InputManager == null)
+        if (InputManager == null || CanIntegrate() == false)
         {
             _buttonActionIcon.gameObject.SetActive(false);
             return;
@@ -152,25 +147,34 @@ public class InputActionButton : UISelectable
         GameEvents.OnInputDeviceChanged -= HandleDeviceChanged;
     }
 
+    private bool CanIntegrate()
+    {
+        if (_onlyIfSelected && !IsSelected)
+            return false;
+        if (!isActiveAndEnabled)
+            return false;
+        if (Button == null)
+            return false;
+        if (!Button.interactable)
+            return false;
+        if (!gameObject.activeInHierarchy)
+            return false;
+
+        return true;
+    }
 
     #region HANDLERS
 
     private void HandleInputAction(InputAction.CallbackContext context)
     {
-        if (!isActiveAndEnabled)
-            return;
-        if (Button == null)
-            return;
-        if (!Button.interactable)
-            return;
-        if (!gameObject.activeInHierarchy)
+        if (CanIntegrate() == false)
             return;
 
-        if (_onlyWhenTopView && UIController != null)
-        {
-            if (_parentView != null && UIController.TopView != _parentView)
-                return;
-        }
+            if (_onlyWhenTopView && UIController != null)
+            {
+                if (ParentView != null && !ParentView.IsTopOnView)
+                    return;
+            }
 
         Button.onClick?.Invoke();
     }

@@ -798,6 +798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -6783744742075384311, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 0
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 1894942854082359015}
   _trigger: 1
@@ -1025,6 +1026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: 8322238052797941846, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 0
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 5377116042349114134}
   _trigger: 1
@@ -1177,6 +1179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAction: {fileID: -6109091105821696245, guid: 08c2f87d8c3619a4cbdc6130bfd8e0c7,
     type: 3}
+  _onlyIfSelected: 1
   _onlyWhenTopView: 1
   _buttonActionIcon: {fileID: 7275763564625695073}
   _trigger: 1

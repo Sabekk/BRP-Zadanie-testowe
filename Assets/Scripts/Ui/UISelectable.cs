@@ -1,8 +1,17 @@
+using System;
 using UnityEngine;
 
-public abstract class UISelectable : MonoBehaviour
+public abstract class UISelectable : UISelectableRaw
 {
     #region VARIABLES
+
+    [Header("Neighbours")]
+    [SerializeField] private UISelectable _topNeighbour;
+    [SerializeField] private UISelectable _bottomNeighbour;
+    [SerializeField] private UISelectable _leftNeighbour;
+    [SerializeField] private UISelectable _rightNeighbour;
+
+    private Action<UISelectable> OnSelected;
 
     #endregion
 
@@ -12,19 +21,30 @@ public abstract class UISelectable : MonoBehaviour
 
     #region METHODS
 
-    public virtual void OnSelect()
+    public UISelectable GetNeighbour(Vector2 direction)
     {
-        ToggleTransition(true);
+        if (direction.normalized.x < 0)
+            return _leftNeighbour;
+        if (direction.normalized.x > 0)
+            return _rightNeighbour;
+        if (direction.normalized.y > 0)
+            return _topNeighbour;
+        if (direction.normalized.y < 0)
+            return _bottomNeighbour;
+
+        return null;
     }
 
-    public virtual void OnDeselect()
+    public void SetUiView(UiView parentView, Action<UISelectable> onSelected)
     {
-        ToggleTransition(false);
+        SetUiView(parentView);
+        OnSelected = onSelected;
     }
 
-    public virtual void ToggleTransition(bool state)
+    public override void OnSelect()
     {
-
+        base.OnSelect();
+        OnSelected?.Invoke(this);
     }
 
     #endregion
