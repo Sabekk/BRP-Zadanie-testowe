@@ -46,6 +46,9 @@ namespace Gameplay.Inputs
             if (CurrentSetting == null)
                 return null;
 
+            if (action == null)
+                return null;
+
             string bindActionName = GetActionBindingName(action);
 
             if (string.IsNullOrEmpty(bindActionName))
@@ -80,9 +83,9 @@ namespace Gameplay.Inputs
             if (action == null || action.bindings.Count <= 0)
                 return string.Empty;
 
-            var index = action.GetBindingIndex();
+            var index = action.GetBindingIndex(InputBinding.MaskByGroup(CurrentSetting.DeviceName));
 
-            if (0 >= index && index <= action.bindings.Count - 1)
+            if (index < 0 || index >= action.bindings.Count)
                 return string.Empty;
 
             var path = action.bindings[index].effectivePath;
@@ -103,6 +106,8 @@ namespace Gameplay.Inputs
             #endregion
 
             #region PROPERTIES
+
+            public string DeviceName => _deviceInputIcons.deviceName;
 
             #endregion
 

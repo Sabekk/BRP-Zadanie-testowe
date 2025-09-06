@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: InputIconsData
   m_EditorClassIdentifier: 
   _deviceInputIcons:
+  - deviceType: 100
+    deviceName: Keyboard
+    icons: []
   - deviceType: 0
+    deviceName: Gamepad
     icons:
     - bindName: Button North
       icon: {fileID: 21300000, guid: 2206a23018bb37c4bacebe93a0612ba4, type: 3}
@@ -36,6 +40,7 @@ MonoBehaviour:
     - bindName: D-Pad/Up
       icon: {fileID: 21300000, guid: 116d4c75512a8e54392697fd2a20a612, type: 3}
   - deviceType: 1
+    deviceName: Gamepad
     icons:
     - bindName: Button North
       icon: {fileID: 21300000, guid: d02639398d725684b9f7d6ee69b94840, type: 3}

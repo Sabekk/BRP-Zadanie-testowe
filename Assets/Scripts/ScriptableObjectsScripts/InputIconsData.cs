@@ -22,6 +22,7 @@ public class InputIconsData : ScriptableObject
     public struct DeviceInputIcons
     {
         public InputDeviceType deviceType;
+        public string deviceName;
         public InputIcon[] icons;
     }
 

@@ -17,6 +17,8 @@ public class InputActionButton : MonoBehaviour
     private Button _button;
     private UiView _parentView;
 
+    private InputAction _actionResolved;
+
     #endregion
 
     #region PROPERTIES
@@ -34,15 +36,21 @@ public class InputActionButton : MonoBehaviour
         _parentView = GetComponentInParent<UiView>(true);
     }
 
+    private void Start()
+    {
+        RefreshIcon();
+    }
+
     private void OnEnable()
     {
-        AttachAction();
-        //RefreshIcon();
+        ResolveRuntimeAction();
+        AttachEvents();
+        RefreshIcon();
     }
 
     private void OnDisable()
     {
-        DetachAction();
+        DetachEvents();
     }
 
     #endregion
@@ -54,7 +62,15 @@ public class InputActionButton : MonoBehaviour
         if (_buttonActionIcon == null)
             return;
 
-        Sprite newInputSprite = InputManager.InpuIconsController.GetActionIcon(_inputAction.action);
+        if (InputManager == null)
+        {
+            _buttonActionIcon.gameObject.SetActive(false);
+            return;
+        }
+        else
+            _buttonActionIcon.gameObject.SetActive(true);
+
+        Sprite newInputSprite = InputManager.InpuIconsController.GetActionIcon(_actionResolved);
         if (newInputSprite != null)
         {
             _buttonActionIcon.gameObject.SetActive(true);
@@ -66,36 +82,48 @@ public class InputActionButton : MonoBehaviour
         }
     }
 
-    private void AttachAction()
+    private void ResolveRuntimeAction()
     {
-        switch (_trigger)
+        _actionResolved = null;
+        if (_inputAction != null && _inputAction.action != null)
         {
-            case TriggerPhase.STARTED:
-                _inputAction.action.started += HandleInputAction;
-                break;
-            case TriggerPhase.PERFORMED:
-                _inputAction.action.performed += HandleInputAction;
-                break;
-            default:
-                break;
+            var binds = InputMapController.Input;
+            _actionResolved = binds?.asset?.FindAction(_inputAction.action.id) ?? _inputAction.action;
         }
+    }
+
+    private void AttachEvents()
+    {
+        if (_actionResolved != null)
+            switch (_trigger)
+            {
+                case TriggerPhase.STARTED:
+                    _actionResolved.started += HandleInputAction;
+                    break;
+                case TriggerPhase.PERFORMED:
+                    _actionResolved.performed += HandleInputAction;
+                    break;
+                default:
+                    break;
+            }
 
         GameEvents.OnInputDeviceChanged += HandleDeviceChanged;
     }
 
-    private void DetachAction()
+    private void DetachEvents()
     {
-        switch (_trigger)
-        {
-            case TriggerPhase.STARTED:
-                _inputAction.action.started -= HandleInputAction;
-                break;
-            case TriggerPhase.PERFORMED:
-                _inputAction.action.performed -= HandleInputAction;
-                break;
-            default:
-                break;
-        }
+        if (_actionResolved != null)
+            switch (_trigger)
+            {
+                case TriggerPhase.STARTED:
+                    _actionResolved.started -= HandleInputAction;
+                    break;
+                case TriggerPhase.PERFORMED:
+                    _actionResolved.performed -= HandleInputAction;
+                    break;
+                default:
+                    break;
+            }
 
         GameEvents.OnInputDeviceChanged -= HandleDeviceChanged;
     }
@@ -105,11 +133,11 @@ public class InputActionButton : MonoBehaviour
 
     private void HandleInputAction(InputAction.CallbackContext context)
     {
-        if (!isActiveAndEnabled) 
+        if (!isActiveAndEnabled)
             return;
-        if (_button == null) 
+        if (_button == null)
             return;
-        if (!_button.interactable) 
+        if (!_button.interactable)
             return;
         if (!gameObject.activeInHierarchy)
             return;
