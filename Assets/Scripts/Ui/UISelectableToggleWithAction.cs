@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class UISelectableWithAction : UISelectable
+public class UISelectableToggleWithAction : UISelectable
 {
     #region VARIABLES
 
-    [SerializeField] private InputActionButton _inputAction;
+    [SerializeField] private UIActionToggler _inputAction;
 
     #endregion
 
@@ -30,6 +30,11 @@ public class UISelectableWithAction : UISelectable
     {
         base.OnDeselect();
         _inputAction.OnDeselect();
+    }
+
+    public override bool CanBeSelected()
+    {
+        return _inputAction.CanBeSelected() && isActiveAndEnabled;
     }
 
     #endregion

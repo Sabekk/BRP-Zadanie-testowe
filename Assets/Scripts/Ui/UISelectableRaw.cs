@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UISelectableRaw : MonoBehaviour
+public abstract class UISelectableRaw : MonoBehaviour
 {
     #region VARIABLES
 
@@ -14,6 +14,10 @@ public class UISelectableRaw : MonoBehaviour
     #endregion
 
     #region METHODS
+    public virtual bool CanBeSelected()
+    {
+        return isActiveAndEnabled;
+    }
 
     public virtual void SetUiView(UiView parentView)
     {

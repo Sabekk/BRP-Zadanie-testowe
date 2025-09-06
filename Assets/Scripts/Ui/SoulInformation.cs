@@ -6,7 +6,6 @@ public class SoulInformation : UISelectable
 {
     [SerializeField] private Image MainImage;
     [SerializeField] private Button SoulButton;
-    [SerializeField] private GameObject selection;
 
     [HideInInspector] public SoulItem soulItem;
 
@@ -17,9 +16,8 @@ public class SoulInformation : UISelectable
         if (OnSoulClick != null) SoulButton.onClick.AddListener(() => OnSoulClick());
     }
 
-    public override void ToggleTransition(bool state)
+    public override bool CanBeSelected()
     {
-        base.ToggleTransition(state);
-        selection.SetActive(state);
+        return soulItem != null && isActiveAndEnabled;
     }
 }

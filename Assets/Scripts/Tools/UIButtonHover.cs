@@ -1,26 +1,43 @@
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public static class UIButtonHover
+public static class UIHover
 {
-    public static void Hover(Button button)
+    public static void Hover(Selectable selectable)
     {
-        if (button == null || EventSystem.current == null) 
+        if (selectable == null)
             return;
-
-        if (EventSystem.current.currentSelectedGameObject == button.gameObject)
-            EventSystem.current.SetSelectedGameObject(null);
-
-        var data = new PointerEventData(EventSystem.current);
-        ExecuteEvents.Execute(button.gameObject, data, ExecuteEvents.pointerEnterHandler);
+        Hover(selectable.gameObject);
     }
 
-    public static void Unhover(Button button)
+    public static void Unhover(Selectable selectable)
     {
-        if (button == null || EventSystem.current == null) 
+        if (selectable == null)
+            return;
+        Unhover(selectable.gameObject);
+    }
+
+    public static void Hover(GameObject gameObject)
+    {
+        var evSystem = EventSystem.current;
+        if (gameObject == null || evSystem == null)
             return;
 
-        var data = new PointerEventData(EventSystem.current);
-        ExecuteEvents.Execute(button.gameObject, data, ExecuteEvents.pointerExitHandler);
+        if (evSystem.currentSelectedGameObject == gameObject)
+            evSystem.SetSelectedGameObject(null);
+
+        var data = new PointerEventData(evSystem);
+        ExecuteEvents.Execute(gameObject, data, ExecuteEvents.pointerEnterHandler);
+    }
+
+    public static void Unhover(GameObject gameObject)
+    {
+        var evSystem = EventSystem.current;
+        if (gameObject == null || evSystem == null)
+            return;
+
+        var data = new PointerEventData(evSystem);
+        ExecuteEvents.Execute(gameObject, data, ExecuteEvents.pointerExitHandler);
     }
 }

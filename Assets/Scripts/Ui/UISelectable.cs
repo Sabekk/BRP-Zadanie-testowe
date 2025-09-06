@@ -5,6 +5,8 @@ public abstract class UISelectable : UISelectableRaw
 {
     #region VARIABLES
 
+    [SerializeField, Tooltip("Can be null")] private GameObject _selection;
+
     [Header("Neighbours")]
     [SerializeField] private UISelectable _topNeighbour;
     [SerializeField] private UISelectable _bottomNeighbour;
@@ -20,19 +22,37 @@ public abstract class UISelectable : UISelectableRaw
     #endregion
 
     #region METHODS
-
-    public UISelectable GetNeighbour(Vector2 direction)
+    public override void ToggleTransition(bool state)
     {
-        if (direction.normalized.x < 0)
-            return _leftNeighbour;
-        if (direction.normalized.x > 0)
-            return _rightNeighbour;
-        if (direction.normalized.y > 0)
-            return _topNeighbour;
-        if (direction.normalized.y < 0)
-            return _bottomNeighbour;
+        base.ToggleTransition(state);
+        if (_selection)
+            _selection.SetActive(state);
+    }
 
-        return null;
+    public UISelectable GetNeighbour(Vector2 direction, UISelectable core=null)
+    {
+        if (core == null) 
+            core = this;
+        else if (core == this) 
+            return null;
+
+        UISelectable neighbour = null;
+        if (direction.normalized.x < 0)
+            neighbour = _leftNeighbour;
+        if (direction.normalized.x > 0)
+            neighbour = _rightNeighbour;
+        if (direction.normalized.y > 0)
+            neighbour = _topNeighbour;
+        if (direction.normalized.y < 0)
+            neighbour = _bottomNeighbour;
+
+        if (neighbour == null)
+            return null;
+
+        if (neighbour.CanBeSelected())
+            return neighbour;
+
+        return neighbour.GetNeighbour(direction, core);
     }
 
     public void SetUiView(UiView parentView, Action<UISelectable> onSelected)

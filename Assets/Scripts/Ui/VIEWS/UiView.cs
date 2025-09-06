@@ -24,13 +24,12 @@ public class UiView : MonoBehaviour
     protected GUIController UIController => GUIController.Instance;
     protected UISelectable CurrentSelected { get; set; }
 
-
     public virtual void Awake()
     {
         if (_autoCollectAllSelectables)
         {
             _selectables = new List<UISelectable>();
-            _selectables.AddRange(GetComponentsInChildren<UISelectable>());
+            _selectables.AddRange(GetComponentsInChildren<UISelectable>(true));
         }
 
         _selectables.ForEach(x => x.SetUiView(this, SetCurrentSelected));
@@ -110,6 +109,9 @@ public class UiView : MonoBehaviour
 
     private void SetCurrentSelected(UISelectable newSelected)
     {
+        if (CurrentSelected == newSelected)
+            return;
+
         if (CurrentSelected != null)
             CurrentSelected.OnDeselect();
         CurrentSelected = newSelected;

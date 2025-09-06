@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SoulEnemy : UISelectableWithAction, IEnemy
+public class SoulEnemy : UISelectableButtonWithAction, IEnemy
 {
     [SerializeField] private GameObject InteractionPanelObject;
     [SerializeField] private GameObject ActionsPanelObject;

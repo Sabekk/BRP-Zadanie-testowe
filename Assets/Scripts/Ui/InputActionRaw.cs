@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
-public class InputActionButton : UISelectableRaw
+public abstract class InputActionRaw<T> : UISelectableRaw where T : Selectable
 {
     #region VARIABLES
 
@@ -20,7 +19,7 @@ public class InputActionButton : UISelectableRaw
 
     #region PROPERTIES
 
-    public Button Button { get; private set; }
+    public T Selectable { get; set; }
     private GUIController UIController => GUIController.Instance;
     private InputManager InputManager => InputManager.Instance;
 
@@ -30,7 +29,7 @@ public class InputActionButton : UISelectableRaw
 
     private void Awake()
     {
-        Button = GetComponent<Button>();
+        Selectable = GetComponent<T>();
     }
 
     private void Start()
@@ -56,16 +55,21 @@ public class InputActionButton : UISelectableRaw
 
     #region METHODS
 
+    public override bool CanBeSelected()
+    {
+        return Selectable!=null && Selectable.interactable && Selectable.enabled && isActiveAndEnabled;
+    }
+
     public override void OnSelect()
     {
         base.OnSelect();
-        UIButtonHover.Hover(Button);
+        UIHover.Hover(Selectable);
     }
 
     public override void OnDeselect()
     {
         base.OnDeselect();
-        UIButtonHover.Unhover(Button);
+        UIHover.Unhover(Selectable);
     }
 
     public override void ToggleTransition(bool state)
@@ -74,6 +78,11 @@ public class InputActionButton : UISelectableRaw
             RefreshIcon();
         else
             _buttonActionIcon.gameObject.SetActive(false);
+    }
+
+    protected virtual void MakeSelectableAction()
+    {
+
     }
 
     private void RefreshIcon()
@@ -153,9 +162,9 @@ public class InputActionButton : UISelectableRaw
             return false;
         if (!isActiveAndEnabled)
             return false;
-        if (Button == null)
+        if (Selectable == null)
             return false;
-        if (!Button.interactable)
+        if (!Selectable.interactable)
             return false;
         if (!gameObject.activeInHierarchy)
             return false;
@@ -170,13 +179,13 @@ public class InputActionButton : UISelectableRaw
         if (CanIntegrate() == false)
             return;
 
-            if (_onlyWhenTopView && UIController != null)
-            {
-                if (ParentView != null && !ParentView.IsTopOnView)
-                    return;
-            }
+        if (_onlyWhenTopView && UIController != null)
+        {
+            if (ParentView != null && !ParentView.IsTopOnView)
+                return;
+        }
 
-        Button.onClick?.Invoke();
+        MakeSelectableAction();
     }
 
     private void HandleDeviceChanged(InputDeviceType deviceType)
