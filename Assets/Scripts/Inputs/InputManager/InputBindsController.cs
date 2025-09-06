@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Gameplay.Inputs
 {
     //TODO Remove MonoBehaviour
-    public class InputMapController : MonoBehaviour
+    public class InputBindsController : MonoBehaviour
     {
         #region VARIABLES
 

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6debef802fd21584dbda1cab34ab61da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mapController: {fileID: 7996415309950579878}
+  _bindsController: {fileID: 7996415309950579878}
   _deviceDetectionController: {fileID: 4011449419679521852}
   _inpuIconsController: {fileID: 5680813747204344092}
 --- !u!1001 &2579912261373700300
@@ -111,7 +111,7 @@ PrefabInstance:
     - target: {fileID: 8917957141934464832, guid: dd60b7e154cd26141b25554d137fa863,
         type: 3}
       propertyPath: m_Name
-      value: InputMapController
+      value: InputBIndsController
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

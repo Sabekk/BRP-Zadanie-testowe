@@ -46,9 +46,18 @@ public partial class @InputBinds: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MakeAction"",
+                    ""name"": ""UseSword"",
                     ""type"": ""Button"",
                     ""id"": ""7ac3e967-bba7-4270-9fbb-f9dce97cab30"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseBow"",
+                    ""type"": ""Button"",
+                    ""id"": ""a3d803c3-bdff-41b7-ac0e-6b3a7a7509b9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -62,6 +71,15 @@ public partial class @InputBinds: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Selection"",
+                    ""type"": ""Button"",
+                    ""id"": ""1fc7e588-8ca2-4820-b2ca-8277c87cf0ac"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,22 +130,22 @@ public partial class @InputBinds: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e084b67d-f7a2-49ea-af16-10f737728f6f"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard"",
-                    ""action"": ""MakeAction"",
+                    ""action"": ""UseSword"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""bb017c0d-78ae-4a5c-b1cc-9ded28ac0e8d"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""MakeAction"",
+                    ""action"": ""UseSword"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -240,6 +258,50 @@ public partial class @InputBinds: IInputActionCollection2, IDisposable
                     ""action"": ""Navigation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b67c07bd-1e48-4859-af2b-db87400788ef"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""UseBow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""875054f2-cad3-49b5-a0fa-9e35eaa3b2bd"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""UseBow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df99fc7c-04f0-4e32-99f2-088ab88b77fa"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Selection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34c077ae-5b20-40e3-848e-a1f0823a3bf4"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Selection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -374,8 +436,10 @@ public partial class @InputBinds: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
-        m_Gameplay_MakeAction = m_Gameplay.FindAction("MakeAction", throwIfNotFound: true);
+        m_Gameplay_UseSword = m_Gameplay.FindAction("UseSword", throwIfNotFound: true);
+        m_Gameplay_UseBow = m_Gameplay.FindAction("UseBow", throwIfNotFound: true);
         m_Gameplay_Navigation = m_Gameplay.FindAction("Navigation", throwIfNotFound: true);
+        m_Gameplay_Selection = m_Gameplay.FindAction("Selection", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Back = m_UI.FindAction("Back", throwIfNotFound: true);
@@ -450,16 +514,20 @@ public partial class @InputBinds: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Pause;
     private readonly InputAction m_Gameplay_Inventory;
-    private readonly InputAction m_Gameplay_MakeAction;
+    private readonly InputAction m_Gameplay_UseSword;
+    private readonly InputAction m_Gameplay_UseBow;
     private readonly InputAction m_Gameplay_Navigation;
+    private readonly InputAction m_Gameplay_Selection;
     public struct GameplayActions
     {
         private @InputBinds m_Wrapper;
         public GameplayActions(@InputBinds wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
-        public InputAction @MakeAction => m_Wrapper.m_Gameplay_MakeAction;
+        public InputAction @UseSword => m_Wrapper.m_Gameplay_UseSword;
+        public InputAction @UseBow => m_Wrapper.m_Gameplay_UseBow;
         public InputAction @Navigation => m_Wrapper.m_Gameplay_Navigation;
+        public InputAction @Selection => m_Wrapper.m_Gameplay_Selection;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -475,12 +543,18 @@ public partial class @InputBinds: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
-            @MakeAction.started += instance.OnMakeAction;
-            @MakeAction.performed += instance.OnMakeAction;
-            @MakeAction.canceled += instance.OnMakeAction;
+            @UseSword.started += instance.OnUseSword;
+            @UseSword.performed += instance.OnUseSword;
+            @UseSword.canceled += instance.OnUseSword;
+            @UseBow.started += instance.OnUseBow;
+            @UseBow.performed += instance.OnUseBow;
+            @UseBow.canceled += instance.OnUseBow;
             @Navigation.started += instance.OnNavigation;
             @Navigation.performed += instance.OnNavigation;
             @Navigation.canceled += instance.OnNavigation;
+            @Selection.started += instance.OnSelection;
+            @Selection.performed += instance.OnSelection;
+            @Selection.canceled += instance.OnSelection;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -491,12 +565,18 @@ public partial class @InputBinds: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
-            @MakeAction.started -= instance.OnMakeAction;
-            @MakeAction.performed -= instance.OnMakeAction;
-            @MakeAction.canceled -= instance.OnMakeAction;
+            @UseSword.started -= instance.OnUseSword;
+            @UseSword.performed -= instance.OnUseSword;
+            @UseSword.canceled -= instance.OnUseSword;
+            @UseBow.started -= instance.OnUseBow;
+            @UseBow.performed -= instance.OnUseBow;
+            @UseBow.canceled -= instance.OnUseBow;
             @Navigation.started -= instance.OnNavigation;
             @Navigation.performed -= instance.OnNavigation;
             @Navigation.canceled -= instance.OnNavigation;
+            @Selection.started -= instance.OnSelection;
+            @Selection.performed -= instance.OnSelection;
+            @Selection.canceled -= instance.OnSelection;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -598,8 +678,10 @@ public partial class @InputBinds: IInputActionCollection2, IDisposable
     {
         void OnPause(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
-        void OnMakeAction(InputAction.CallbackContext context);
+        void OnUseSword(InputAction.CallbackContext context);
+        void OnUseBow(InputAction.CallbackContext context);
         void OnNavigation(InputAction.CallbackContext context);
+        void OnSelection(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SoulEnemy : MonoBehaviour, IEnemy
+public class SoulEnemy : UISelectableWithAction, IEnemy
 {
     [SerializeField] private GameObject InteractionPanelObject;
     [SerializeField] private GameObject ActionsPanelObject;
@@ -9,6 +9,12 @@ public class SoulEnemy : MonoBehaviour, IEnemy
     private SpawnPoint _enemyPosition;
 
     public EnemyData Data { get; private set; }
+    public bool InCombat{ get; private set; }
+
+    public override void ToggleTransition(bool state)
+    {
+        base.ToggleTransition(state);
+    }
 
     public void SetupEnemy(EnemyData data, SpawnPoint spawnPoint)
     {
@@ -16,6 +22,7 @@ public class SoulEnemy : MonoBehaviour, IEnemy
         EnemySpriteRenderer.sprite = Data.Icon;
         _enemyPosition = spawnPoint;
         gameObject.SetActive(true);
+        InCombat = false;
     }
 
     public SpawnPoint GetEnemyPosition()
@@ -32,6 +39,14 @@ public class SoulEnemy : MonoBehaviour, IEnemy
     {
         ActiveInteractionPanel(false);
         ActiveActionPanel(true);
+        InCombat = true;
+    }
+
+    private void DeactiveCombatWithEnemy()
+    {
+        ActiveInteractionPanel(true);
+        ActiveActionPanel(false);
+        InCombat = false;
     }
 
     private void ActiveInteractionPanel(bool active)

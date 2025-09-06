@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class InputActionButton : MonoBehaviour
+public class InputActionButton : UISelectable
 {
     #region VARIABLES
 
@@ -50,12 +50,24 @@ public class InputActionButton : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_buttonActionIcon)
+            _buttonActionIcon.gameObject.SetActive(false);
         DetachEvents();
     }
 
     #endregion
 
     #region METHODS
+
+    public override void OnSelect()
+    {
+        _buttonActionIcon.gameObject.SetActive(true);
+    }
+
+    public override void OnDeselect()
+    {
+        _buttonActionIcon.gameObject.SetActive(false);
+    }
 
     private void RefreshIcon()
     {
@@ -87,7 +99,7 @@ public class InputActionButton : MonoBehaviour
         _actionResolved = null;
         if (_inputAction != null && _inputAction.action != null)
         {
-            var binds = InputMapController.Input;
+            var binds = InputBindsController.Input;
             _actionResolved = binds?.asset?.FindAction(_inputAction.action.id) ?? _inputAction.action;
         }
     }

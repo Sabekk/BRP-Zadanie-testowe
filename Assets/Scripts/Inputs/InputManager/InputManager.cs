@@ -6,7 +6,7 @@ namespace Gameplay.Inputs
     {
         #region VARIABLES
 
-        [SerializeField] private InputMapController _mapController;
+        [SerializeField] private InputBindsController _bindsController;
         [SerializeField] private DeviceDetectionController _deviceDetectionController;
         [SerializeField] private InpuIconsController _inpuIconsController;
 
@@ -14,7 +14,7 @@ namespace Gameplay.Inputs
 
         #region PROPERTIES
 
-        public InputMapController MapController => _mapController;
+        public InputBindsController InputBindsController => _bindsController;
         public DeviceDetectionController DeviceDetectionController => _deviceDetectionController;
         public InpuIconsController InpuIconsController => _inpuIconsController;
 
@@ -26,21 +26,21 @@ namespace Gameplay.Inputs
         protected override void Awake()
         {
             base.Awake();
-            MapController.Initialzie();
+            InputBindsController.Initialzie();
             DeviceDetectionController.Initialize();
             InpuIconsController.Initialize();
         }
 
         private void Start()
         {
-            MapController.LateInitialzie();
+            InputBindsController.LateInitialzie();
             DeviceDetectionController.LateInitialzie();
             InpuIconsController.LateInitialzie();
         }
 
         private void OnDestroy()
         {
-            MapController.CleanUp();
+            InputBindsController.CleanUp();
             DeviceDetectionController.CleanUp();
             InpuIconsController.CleanUp();
         }
