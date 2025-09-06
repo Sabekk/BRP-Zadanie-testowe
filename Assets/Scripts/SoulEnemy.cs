@@ -11,9 +11,10 @@ public class SoulEnemy : UISelectableWithAction, IEnemy
     public EnemyData Data { get; private set; }
     public bool InCombat{ get; private set; }
 
-    public override void ToggleTransition(bool state)
+    public override void OnDeselect()
     {
-        base.ToggleTransition(state);
+        base.OnDeselect();
+        DeactiveCombatWithEnemy();
     }
 
     public void SetupEnemy(EnemyData data, SpawnPoint spawnPoint)

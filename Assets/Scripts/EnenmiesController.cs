@@ -168,13 +168,14 @@ public class EnenmiesController : MonoBehaviour
             currentIndex = -1;
 
         SpawnPoint current = _currentSelectedPoint;
-        for (int step = 1; step <= count; step++)
+        for (int i = 1; i <= count; i++)
         {
-            int nextIndex = (currentIndex + step * dir % count + count) % count;
+            int nextIndex = (currentIndex + i * dir % count + count) % count;
             var newPoint = SpawnPoints[nextIndex];
             if (newPoint != null && newPoint.IsOccupied)
             {
-                SetSelected(newPoint); return;
+                SetSelected(newPoint); 
+                return;
             }
         }
 
@@ -185,9 +186,13 @@ public class EnenmiesController : MonoBehaviour
             if (current == point)
                 return;
 
-            if (current?.Enemy != null) current.Enemy.OnDeselect();
+            if (current?.Enemy != null) 
+                current.Enemy.OnDeselect();
+
             _currentSelectedPoint = point;
-            if (point?.Enemy != null) point.Enemy.OnSelect();
+
+            if (point?.Enemy != null) 
+                point.Enemy.OnSelect();
         }
     }
 

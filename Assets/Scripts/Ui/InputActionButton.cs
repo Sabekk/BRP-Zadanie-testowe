@@ -1,6 +1,7 @@
 using Gameplay.Inputs;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -14,7 +15,6 @@ public class InputActionButton : UISelectable
     [SerializeField] private Image _buttonActionIcon;
     [SerializeField] private TriggerPhase _trigger = TriggerPhase.PERFORMED;
 
-    private Button _button;
     private UiView _parentView;
 
     private InputAction _actionResolved;
@@ -23,6 +23,7 @@ public class InputActionButton : UISelectable
 
     #region PROPERTIES
 
+    public Button Button { get; private set; }
     private GUIController UIController => GUIController.Instance;
     private InputManager InputManager => InputManager.Instance;
 
@@ -32,7 +33,7 @@ public class InputActionButton : UISelectable
 
     private void Awake()
     {
-        _button = GetComponent<Button>();
+        Button = GetComponent<Button>();
         _parentView = GetComponentInParent<UiView>(true);
     }
 
@@ -61,12 +62,23 @@ public class InputActionButton : UISelectable
 
     public override void OnSelect()
     {
-        _buttonActionIcon.gameObject.SetActive(true);
+        base.OnSelect();
+        UIButtonHover.Hover(Button);
     }
 
     public override void OnDeselect()
     {
-        _buttonActionIcon.gameObject.SetActive(false);
+        base.OnDeselect();
+        UIButtonHover.Unhover(Button);
+    }
+
+    public override void ToggleTransition(bool state)
+    {
+        base.ToggleTransition(state);
+        if (state)
+            RefreshIcon();
+        else
+            _buttonActionIcon.gameObject.SetActive(false);
     }
 
     private void RefreshIcon()
@@ -147,9 +159,9 @@ public class InputActionButton : UISelectable
     {
         if (!isActiveAndEnabled)
             return;
-        if (_button == null)
+        if (Button == null)
             return;
-        if (!_button.interactable)
+        if (!Button.interactable)
             return;
         if (!gameObject.activeInHierarchy)
             return;
@@ -160,7 +172,7 @@ public class InputActionButton : UISelectable
                 return;
         }
 
-        _button.onClick?.Invoke();
+        Button.onClick?.Invoke();
     }
 
     private void HandleDeviceChanged(InputDeviceType deviceType)

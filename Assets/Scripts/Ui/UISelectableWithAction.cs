@@ -25,11 +25,15 @@ public class UISelectableWithAction : UISelectable
 
     public override void OnSelect()
     {
+        base.OnSelect();
+        _inputAction.OnSelect();
         _inputAction.enabled = true;
     }
 
     public override void OnDeselect()
     {
+        base.OnDeselect();
+        _inputAction.OnDeselect();
         _inputAction.enabled = false;
     }
 
