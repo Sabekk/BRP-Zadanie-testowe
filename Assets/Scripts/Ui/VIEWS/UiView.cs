@@ -218,11 +218,17 @@ public class UiView : MonoBehaviour
 
     protected virtual void HandleBackInput()
     {
+        if (!UIInputGate.TryConsume(this, true))
+            return;
+
         BackButon.onClick?.Invoke();
     }
 
     protected virtual void HandleUINavigation(Vector2 direction)
     {
+        if (!UIInputGate.TryConsume(this, true))
+            return;
+
         if (CurrentSelected == null)
             TryInitCurrentSelectable();
 

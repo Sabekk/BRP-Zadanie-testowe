@@ -57,7 +57,7 @@ public abstract class InputActionRaw<T> : UISelectableRaw where T : Selectable
 
     public override bool CanBeSelected()
     {
-        return Selectable!=null && Selectable.interactable && Selectable.enabled && isActiveAndEnabled;
+        return Selectable != null && Selectable.interactable && Selectable.enabled && isActiveAndEnabled;
     }
 
     public override void OnSelect()
@@ -181,9 +181,11 @@ public abstract class InputActionRaw<T> : UISelectableRaw where T : Selectable
 
         if (_onlyWhenTopView && UIController != null)
         {
-            if (ParentView != null && !ParentView.IsTopOnView)
+            //if (ParentView != null && !ParentView.IsTopOnView)
+            if (!UIInputGate.TryConsume(ParentView, _onlyWhenTopView))
                 return;
         }
+
 
         MakeSelectableAction();
     }

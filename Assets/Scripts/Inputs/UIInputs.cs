@@ -58,7 +58,6 @@ namespace Gameplay.Inputs
         {
             if (context.performed)
             {
-                Debug.Log("CLICKED");
                 OnUINavigation?.Invoke(context.ReadValue<Vector2>());
             }
         }
