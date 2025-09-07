@@ -16,9 +16,12 @@ public static class UIInputGate
             _consumed = false;
         }
 
-        if (onlyWhenTop && callerView != _latchedTop) 
-            return false;
-        if (_consumed) 
+        if (callerView != null)
+        {
+            if (onlyWhenTop && callerView != _latchedTop)
+                return false;
+        }
+        if (_consumed)
             return false;
 
         _consumed = true;
