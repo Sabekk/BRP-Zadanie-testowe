@@ -11,6 +11,7 @@ public class PopUpView : UiView
     
     public override void Awake()
     {
+        base.Awake();
         GetBackButton().onClick.AddListener(() => DestroyView_OnClick(this));
     }
 

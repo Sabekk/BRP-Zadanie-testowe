@@ -26,7 +26,7 @@ public class UiView : MonoBehaviour
 
     public virtual void Awake()
     {
-        InitializeSelectables();
+        InitializeElements();
         BackButon.onClick.AddListener(() => DisableView_OnClick(this));
     }
 
@@ -43,7 +43,7 @@ public class UiView : MonoBehaviour
         DetachEvents();
     }
 
-    protected virtual void InitializeSelectables()
+    protected virtual void InitializeElements()
     {
         if (_autoCollectAllSelectables)
         {
@@ -52,6 +52,10 @@ public class UiView : MonoBehaviour
         }
 
         _selectables.ForEach(x => x.SetUiView(this, SetCurrentSelected));
+
+        List<UISelectableRaw> _staticSelectables = new List<UISelectableRaw>();
+        _staticSelectables.AddRange(GetComponentsInChildren<UIStaticSelectable>(true));
+        _staticSelectables.ForEach(x => x.SetUiView(this));
     }
 
     protected virtual void AddSelectable(UISelectable newSelectable)

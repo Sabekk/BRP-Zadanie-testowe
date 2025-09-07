@@ -29,6 +29,18 @@ public abstract class UISelectable : UISelectableRaw
             _selection.SetActive(state);
     }
 
+    public override void OnSelect()
+    {
+        base.OnSelect();
+        OnSelected?.Invoke(this);
+    }
+
+    public void SetUiView(UiView parentView, Action<UISelectable> onSelected)
+    {
+        SetUiView(parentView);
+        OnSelected = onSelected;
+    }
+
     public void SetNeighbours(UISelectable top, UISelectable bottom, UISelectable left, UISelectable right)
     {
         _topNeighbour = top;
@@ -75,18 +87,6 @@ public abstract class UISelectable : UISelectableRaw
             return neighbour;
 
         return neighbour.GetNeighbour(direction, core);
-    }
-
-    public void SetUiView(UiView parentView, Action<UISelectable> onSelected)
-    {
-        SetUiView(parentView);
-        OnSelected = onSelected;
-    }
-
-    public override void OnSelect()
-    {
-        base.OnSelect();
-        OnSelected?.Invoke(this);
     }
 
     #endregion

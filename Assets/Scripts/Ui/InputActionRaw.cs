@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public abstract class InputActionRaw<T> : UISelectableRaw where T : Selectable
+public abstract class InputActionRaw<T> : UIStaticSelectable where T : Selectable
 {
     #region VARIABLES
 
@@ -185,7 +185,6 @@ public abstract class InputActionRaw<T> : UISelectableRaw where T : Selectable
             if (!UIInputGate.TryConsume(ParentView, _onlyWhenTopView))
                 return;
         }
-
 
         MakeSelectableAction();
     }

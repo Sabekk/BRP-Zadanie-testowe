@@ -33,7 +33,7 @@ public class InventoryView : UiView
             newSoul.SetSoulItem(SoulController.Instance.Souls[i], () => SoulItem_OnClick(newSoul));
         }
 
-        InitializeSelectables();
+        InitializeElements();
         UIGridNeighbours.SetChildNeighbours(_contentParent.transform);
         TryInitCurrentSelectable();
     }
@@ -142,7 +142,10 @@ public class InventoryView : UiView
             UseButton.interactable = isInCorrectLocalization;
             UseButton.onClick.AddListener(() => GUIController.Instance.ShowPopUpMessage(popUpInfo));
         }
-        UseButton.gameObject.SetActive(active);
+        //TMP refresh
+        UseButton.gameObject.SetActive(false);
+        if (active)
+            UseButton.gameObject.SetActive(active);
     }
 
     private void SetupDestroyButton(bool active)
@@ -160,7 +163,9 @@ public class InventoryView : UiView
             };
             DestroyButton.onClick.AddListener(() => GUIController.Instance.ShowPopUpMessage(popUpInfo));
         }
-
-        DestroyButton.gameObject.SetActive(active);
+        //TMP refresh
+        DestroyButton.gameObject.SetActive(false);
+        if (active)
+            DestroyButton.gameObject.SetActive(active);
     }
 }
