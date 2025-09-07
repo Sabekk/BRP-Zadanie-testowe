@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GUIController : MonoSingleton<GUIController>
 {
-    public event Action OnOpenedViewsChanged;
-
     [SerializeField] private GameObject DisableOnStartObject;
     [SerializeField] private RectTransform ViewsParent;
     [SerializeField] private GameObject InGameGuiObject;
@@ -15,12 +13,12 @@ public class GUIController : MonoSingleton<GUIController>
     private List<UiView> _openedViews = new List<UiView>();
 
     public bool AnyViewOpen => _openedViews.Count > 0;
-    public UiView TopView => _openedViews.Count > 0 ? _openedViews[0] : null;
+    public UiView TopView => _openedViews.Count > 0 ? _openedViews[_openedViews.Count - 1] : null;
 
     protected override void Awake()
     {
         base.Awake();
-        DisableOnStartObject.SetActive(false);    
+        DisableOnStartObject.SetActive(false);
     }
 
     private void Start()
@@ -84,14 +82,14 @@ public class GUIController : MonoSingleton<GUIController>
         _openedViews.Remove(uiView);
         _openedViews.Add(uiView);
 
-        OnOpenedViewsChanged?.Invoke();
+        GameEvents.OnOpenedViewsChanged?.Invoke();
     }
 
     private void HandleViewClosed(UiView uiView)
     {
         _openedViews.Remove(uiView);
 
-        OnOpenedViewsChanged?.Invoke();
+        GameEvents.OnOpenedViewsChanged?.Invoke();
     }
 
     #endregion

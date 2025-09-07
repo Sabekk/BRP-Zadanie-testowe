@@ -31,18 +31,13 @@ public class GameStateManager : MonoSingleton<GameStateManager>
 
     private void AttachEvents()
     {
-        if (GUIController != null)
-        {
-            GUIController.OnOpenedViewsChanged += HandleOpenedViewsChanged;
-        }
+        GameEvents.OnOpenedViewsChanged += HandleOpenedViewsChanged;
+
     }
 
     private void DetachEvents()
     {
-        if (GUIController != null)
-        {
-            GUIController.OnOpenedViewsChanged -= HandleOpenedViewsChanged;
-        }
+        GameEvents.OnOpenedViewsChanged -= HandleOpenedViewsChanged;
     }
 
     private void RefreshCurrentState(bool ignoreCurrentState = false)

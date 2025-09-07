@@ -57,7 +57,10 @@ namespace Gameplay.Inputs
         public void OnNavigation(InputAction.CallbackContext context)
         {
             if (context.performed)
+            {
+                Debug.Log("CLICKED");
                 OnUINavigation?.Invoke(context.ReadValue<Vector2>());
+            }
         }
 
         #endregion

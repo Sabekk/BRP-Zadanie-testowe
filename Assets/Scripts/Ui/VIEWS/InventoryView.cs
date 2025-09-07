@@ -85,23 +85,23 @@ public class InventoryView : UiView
         {
             //USE SOUL
             GameEvents.OnSoulItemUsed?.Invoke(_currentSoulInformation);
-            TrySelectNeighbour();
+            RemoveCurrentSoul();
         }
     }
 
     private void DestroyCurrentSoul()
     {
-        TrySelectNeighbour();
+        RemoveCurrentSoul();
     }
 
-    private void TrySelectNeighbour()
+    private void RemoveCurrentSoul()
     {
         if (_currentSoulInformation != null)
         {
-            RemoveSelectable(_currentSoulInformation);
-
             _currentSelectedGameObject.transform.SetParent(null);
             Destroy(_currentSelectedGameObject);
+
+            RemoveSelectable(_currentSoulInformation);
 
             if (CurrentSelected == null)
                 ClearSoulInformation();

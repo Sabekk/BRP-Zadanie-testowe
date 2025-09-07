@@ -76,16 +76,14 @@ public class UiView : MonoBehaviour
 
     protected virtual void AttachEvents()
     {
-        GameEvents.OnViewOpened += HandleViewOpened;
-        GameEvents.OnViewClosed += HandleViewClosed;
+        GameEvents.OnOpenedViewsChanged += HandleOpenedViewsChanged;
 
         RefreshEventsOfTopView();
     }
 
     protected virtual void DetachEvents()
     {
-        GameEvents.OnViewOpened -= HandleViewOpened;
-        GameEvents.OnViewClosed -= HandleViewClosed;
+        GameEvents.OnOpenedViewsChanged -= HandleOpenedViewsChanged;
 
         RefreshEventsOfTopView();
     }
@@ -141,6 +139,7 @@ public class UiView : MonoBehaviour
             DetachEventsOfTopView();
     }
 
+    #region UI
 
     public void ActiveView_OnClick(UiView viewToActive)
     {
@@ -208,13 +207,11 @@ public class UiView : MonoBehaviour
         return BackButon;
     }
 
+    #endregion
 
-    private void HandleViewOpened(UiView uiView)
-    {
-        RefreshEventsOfTopView();
-    }
+    #region HANDLERS
 
-    private void HandleViewClosed(UiView uiView)
+    private void HandleOpenedViewsChanged()
     {
         RefreshEventsOfTopView();
     }
@@ -237,4 +234,6 @@ public class UiView : MonoBehaviour
         if (newSelectable)
             newSelectable.OnSelect();
     }
+
+    #endregion
 }

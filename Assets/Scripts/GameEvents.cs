@@ -11,5 +11,6 @@ public static class GameEvents
 
     public static Action<UiView> OnViewOpened;
     public static Action<UiView> OnViewClosed;
+    public static Action OnOpenedViewsChanged;
 }
 
