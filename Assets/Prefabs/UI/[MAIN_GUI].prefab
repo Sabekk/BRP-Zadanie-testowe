@@ -12439,11 +12439,13 @@ MonoBehaviour:
   SoulItemPlaceHolder: {fileID: 1374422442518691456, guid: 16c379c532912314d81083104ca27a3a,
     type: 3}
   _contentParent: {fileID: 8146150602394358071}
+  _scrollRect: {fileID: 8146150604192596825}
   Description: {fileID: 8146150602232835790}
   Name: {fileID: 3747887395249707520}
   Avatar: {fileID: 8146150602975384026}
   UseButton: {fileID: 8146150603438539386}
   DestroyButton: {fileID: 8146150602994425964}
+  _currentSelectedGameObject: {fileID: 0}
 --- !u!1 &8146150602256720375
 GameObject:
   m_ObjectHideFlags: 0

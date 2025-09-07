@@ -8,6 +8,7 @@ public class InventoryView : UiView
     [SerializeField]
     private SoulInformation SoulItemPlaceHolder;
     [SerializeField] private RectTransform _contentParent;
+    [SerializeField] private ScrollRect _scrollRect;
 
     [SerializeField] private Text Description;
     [SerializeField] private Text Name;
@@ -17,6 +18,7 @@ public class InventoryView : UiView
 
     public GameObject _currentSelectedGameObject;
     private SoulInformation _currentSoulInformation;
+    private Vector2 _paddingOfInventoryElement = new Vector2(5f, 5f);
 
     private void Start()
     {
@@ -52,6 +54,7 @@ public class InventoryView : UiView
         _currentSoulInformation = soulInformation;
         _currentSelectedGameObject = soulInformation.gameObject;
         SetupSoulInformation(soulInformation.soulItem);
+        TryRefreshScrollRect();
     }
 
     private void SetupSoulInformation(SoulItem soulItem)
@@ -66,6 +69,18 @@ public class InventoryView : UiView
     private void SelectElement(int index)
     {
 
+    }
+
+    private void TryRefreshScrollRect()
+    {
+        if (_currentSoulInformation == null)
+            return;
+        if (_currentSelectedGameObject == null)
+            return;
+        if (_scrollRect == null)
+            return;
+
+        _scrollRect.ScrollToMakeVisible((RectTransform)_currentSelectedGameObject.transform, _paddingOfInventoryElement);
     }
 
     private void CantUseCurrentSoul()
