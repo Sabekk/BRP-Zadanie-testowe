@@ -38,6 +38,7 @@ public class EnenmiesController : MonoBehaviour
 
     private void AttachListeners()
     {
+        GameEvents.OnInputDeviceChanged += HandleDeviceChanged;
         GameEvents.EnemyKilled += EnemyKilled;
         if (Binds != null)
         {
@@ -47,6 +48,7 @@ public class EnenmiesController : MonoBehaviour
 
     private void DettachListeners()
     {
+        GameEvents.OnInputDeviceChanged -= HandleDeviceChanged;
         GameEvents.EnemyKilled -= EnemyKilled;
         if (Binds != null)
         {
@@ -199,6 +201,15 @@ public class EnenmiesController : MonoBehaviour
     private void ConfigureEnemiesController()
     {
         _maxEnemies = SpawnPoints != null ? SpawnPoints.Count : 3;
+    }
+
+    private void HandleDeviceChanged(InputDeviceType obj)
+    {
+        foreach (var spawnPoint in SpawnPoints)
+        {
+            if (spawnPoint.IsOccupied)
+                spawnPoint.Enemy.OnDeselect();
+        }
     }
 
 }
