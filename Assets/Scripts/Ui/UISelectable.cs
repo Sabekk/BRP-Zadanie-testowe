@@ -29,11 +29,33 @@ public abstract class UISelectable : UISelectableRaw
             _selection.SetActive(state);
     }
 
-    public UISelectable GetNeighbour(Vector2 direction, UISelectable core=null)
+    public void SetNeighbours(UISelectable top, UISelectable bottom, UISelectable left, UISelectable right)
     {
-        if (core == null) 
+        _topNeighbour = top;
+        _bottomNeighbour = bottom;
+        _leftNeighbour = left;
+        _rightNeighbour = right;
+    }
+
+    public UISelectable GetAnyNeighbour()
+    {
+        UISelectable neigbour = null;
+        neigbour = GetNeighbour(Vector2.right);
+        if (neigbour == null)
+            neigbour = GetNeighbour(Vector2.left);
+        if (neigbour == null)
+            neigbour = GetNeighbour(Vector2.up);
+        if (neigbour == null)
+            neigbour = GetNeighbour(Vector2.down);
+
+        return neigbour;
+    }
+
+    public UISelectable GetNeighbour(Vector2 direction, UISelectable core = null)
+    {
+        if (core == null)
             core = this;
-        else if (core == this) 
+        else if (core == this)
             return null;
 
         UISelectable neighbour = null;

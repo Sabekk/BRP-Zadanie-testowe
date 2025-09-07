@@ -26,14 +26,7 @@ public class UiView : MonoBehaviour
 
     public virtual void Awake()
     {
-        if (_autoCollectAllSelectables)
-        {
-            _selectables = new List<UISelectable>();
-            _selectables.AddRange(GetComponentsInChildren<UISelectable>(true));
-        }
-
-        _selectables.ForEach(x => x.SetUiView(this, SetCurrentSelected));
-
+        InitializeSelectables();
         BackButon.onClick.AddListener(() => DisableView_OnClick(this));
     }
 
@@ -48,6 +41,37 @@ public class UiView : MonoBehaviour
     {
         GameEvents.OnViewClosed?.Invoke(this);
         DetachEvents();
+    }
+
+    protected virtual void InitializeSelectables()
+    {
+        if (_autoCollectAllSelectables)
+        {
+            _selectables = new List<UISelectable>();
+            _selectables.AddRange(GetComponentsInChildren<UISelectable>(true));
+        }
+
+        _selectables.ForEach(x => x.SetUiView(this, SetCurrentSelected));
+    }
+
+    protected virtual void AddSelectable(UISelectable newSelectable)
+    {
+        if (_selectables.Contains(newSelectable))
+            return;
+
+        newSelectable.SetUiView(this, SetCurrentSelected);
+        _selectables.Add(newSelectable);
+    }
+
+    protected virtual void RemoveSelectable(UISelectable selectableToRemove)
+    {
+        if (CurrentSelected == selectableToRemove)
+        {
+            UISelectable neigbour = CurrentSelected.GetAnyNeighbour();
+            SetCurrentSelected(neigbour);
+        }
+
+        _selectables.Remove(selectableToRemove);
     }
 
     protected virtual void AttachEvents()
@@ -84,30 +108,21 @@ public class UiView : MonoBehaviour
         }
     }
 
-    private void RefreshEventsOfTopView()
-    {
-        if (IsTopOnView && isActiveAndEnabled)
-        {
-            AttachEventsOfTopView();
-        }
-        else
-            DetachEventsOfTopView();
-    }
-
-    private void TryInitCurrentSelectable()
+    protected bool TryInitCurrentSelectable()
     {
         if (CurrentSelected != null)
-            return;
+            return false;
         if (_selectables == null)
-            return;
+            return false;
         if (_selectables.Count == 0)
-            return;
+            return false;
 
         CurrentSelected = _selectables[0];
         CurrentSelected.OnSelect();
+        return true;
     }
 
-    private void SetCurrentSelected(UISelectable newSelected)
+    protected void SetCurrentSelected(UISelectable newSelected)
     {
         if (CurrentSelected == newSelected)
             return;
@@ -115,7 +130,17 @@ public class UiView : MonoBehaviour
         if (CurrentSelected != null)
             CurrentSelected.OnDeselect();
         CurrentSelected = newSelected;
+        CurrentSelected.OnSelect();
     }
+
+    private void RefreshEventsOfTopView()
+    {
+        if (IsTopOnView && isActiveAndEnabled)
+            AttachEventsOfTopView();
+        else
+            DetachEventsOfTopView();
+    }
+
 
     public void ActiveView_OnClick(UiView viewToActive)
     {

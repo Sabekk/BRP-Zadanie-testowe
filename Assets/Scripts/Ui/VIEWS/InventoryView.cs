@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryView : UiView
 {
-    [Header("Inventory Elements")] [SerializeField]
+    [Header("Inventory Elements")]
+    [SerializeField]
     private SoulInformation SoulItemPlaceHolder;
+    [SerializeField] private RectTransform _contentParent;
 
     [SerializeField] private Text Description;
     [SerializeField] private Text Name;
@@ -12,15 +15,8 @@ public class InventoryView : UiView
     [SerializeField] private Button UseButton;
     [SerializeField] private Button DestroyButton;
 
-    private RectTransform _contentParent;
-    private GameObject _currentSelectedGameObject;
+    public GameObject _currentSelectedGameObject;
     private SoulInformation _currentSoulInformation;
-
-    public override void Awake()
-    {
-        base.Awake();
-        _contentParent = (RectTransform)SoulItemPlaceHolder.transform.parent;
-    }
 
     private void Start()
     {
@@ -35,13 +31,9 @@ public class InventoryView : UiView
             newSoul.SetSoulItem(SoulController.Instance.Souls[i], () => SoulItem_OnClick(newSoul));
         }
 
-        SoulItemPlaceHolder.gameObject.SetActive(false);
-    }
-
-    public override void OnEnable()
-    {
-        base.OnEnable();
-        ClearSoulInformation();
+        InitializeSelectables();
+        UIGridNeighbours.SetChildNeighbours(_contentParent.transform);
+        TryInitCurrentSelectable();
     }
 
     private void ClearSoulInformation()
@@ -92,16 +84,30 @@ public class InventoryView : UiView
         else
         {
             //USE SOUL
-            Destroy(_currentSelectedGameObject);
             GameEvents.OnSoulItemUsed?.Invoke(_currentSoulInformation);
-            ClearSoulInformation();
+            TrySelectNeighbour();
         }
     }
 
     private void DestroyCurrentSoul()
     {
-        Destroy(_currentSelectedGameObject);
-        ClearSoulInformation();
+        TrySelectNeighbour();
+    }
+
+    private void TrySelectNeighbour()
+    {
+        if (_currentSoulInformation != null)
+        {
+            RemoveSelectable(_currentSoulInformation);
+
+            _currentSelectedGameObject.transform.SetParent(null);
+            Destroy(_currentSelectedGameObject);
+
+            if (CurrentSelected == null)
+                ClearSoulInformation();
+
+            UIGridNeighbours.SetChildNeighbours(_contentParent.transform);
+        }
     }
 
     private void SetupUseButton(bool active)

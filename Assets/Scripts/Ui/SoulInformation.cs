@@ -9,11 +9,24 @@ public class SoulInformation : UISelectable
 
     [HideInInspector] public SoulItem soulItem;
 
+    private Action OnSoulClick;
+
     public void SetSoulItem(SoulItem _soulItem, Action OnSoulClick = null)
     {
         soulItem = _soulItem;
         MainImage.sprite = soulItem.Avatar;
-        if (OnSoulClick != null) SoulButton.onClick.AddListener(() => OnSoulClick());
+        this.OnSoulClick = OnSoulClick;
+
+        SoulButton.onClick.AddListener(() =>
+        {
+            OnSelect();
+        });
+    }
+
+    public override void OnSelect()
+    {
+        base.OnSelect();
+        OnSoulClick?.Invoke();
     }
 
     public override bool CanBeSelected()
